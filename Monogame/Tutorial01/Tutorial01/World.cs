@@ -19,6 +19,17 @@ namespace Tutorial01
             this.game = game;
         }
 
+        public virtual void Initialize()
+        {
+
+            Spawn(typeof(Monster).FullName);
+            int width = game.GraphicsDevice.PresentationParameters.BackBufferWidth;
+            Random rnd = new Random();
+            for (int i = 0; i < width / 64; i++) {
+                Spawn(typeof(Spike).FullName, new Vector2(i * 64, game.GraphicsDevice.PresentationParameters.BackBufferHeight - 128 + (int)(64 * rnd.NextDouble())));
+            }
+        }
+
         public virtual Entity Spawn(string className)
         {
             return Spawn(className, Vector2.Zero);

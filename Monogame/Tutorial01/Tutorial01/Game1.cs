@@ -31,6 +31,8 @@ namespace Tutorial01
         {
             // TODO: Add your initialization logic here
 
+            world.Initialize();
+
             base.Initialize();
         }
 
@@ -44,7 +46,12 @@ namespace Tutorial01
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Полное имя, включая namespace
-            world.Spawn("Tutorial01.Monster");
+            //Not good practice
+            //world.Spawn("Tutorial01.Monster");
+            //world.Spawn("Tutorial01.Spike", new Vector2(100, 100));
+
+            //Всегда пишите лучше так:
+
 
             // TODO: use this.Content to load your game content here
         }

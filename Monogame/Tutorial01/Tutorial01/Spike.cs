@@ -8,15 +8,15 @@ using System.Text;
 
 namespace Tutorial01
 {
-    public class Monster : Entity
+    public class Spike : Entity
     {
         public Texture2D texture;
 
-        public Monster(World world) : base(world)
+        public Spike(World world) : base(world)
         {
             //Загружаем нашу текстуру.
             //Возьмем нашу "игру", о которой знает world, и возьмем у ней ContentManager
-            texture = world.game.Content.Load<Texture2D>("monster");
+            texture = world.game.Content.Load<Texture2D>("spike");
         }
 
 
@@ -40,6 +40,10 @@ namespace Tutorial01
 
         public override void Touch(Entity other)
         {
+            if (!(other is Spike))
+            {
+                other.Kill(this);
+            }
             base.Touch(other);
         }
 
@@ -48,27 +52,6 @@ namespace Tutorial01
         {
            
             float delta = gameTime.ElapsedGameTime.Milliseconds / 1000f;
-            KeyboardState ks = Keyboard.GetState();
-            if (ks.IsKeyDown(Keys.A))
-            {
-                Position.X -= 100f * delta;
-            }
-
-            if (ks.IsKeyDown(Keys.D))
-            {
-                Position.X += 100f * delta;
-            }
-
-            if (ks.IsKeyDown(Keys.W))
-            {
-                Position.Y -= 100f * delta;
-            }
-
-            if (ks.IsKeyDown(Keys.S))
-            {
-                Position.Y += 100f * delta;
-            }
-
             boundingBox.Min = new Vector3(Position, 0);
             boundingBox.Max = new Vector3(Position + new Vector2(texture.Width, texture.Height), 0);
             base.Update(gameTime);
