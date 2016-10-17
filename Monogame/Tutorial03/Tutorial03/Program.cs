@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GameCoreTutorial00
+namespace Tutorial03
 {
 #if WINDOWS || LINUX
     /// <summary>
@@ -14,7 +14,8 @@ namespace GameCoreTutorial00
         [STAThread]
         static void Main()
         {
-            new RunForm().ShowDialog();
+            using (var game = new Game1())
+                game.Run();
         }
     }
 #endif
