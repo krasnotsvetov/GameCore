@@ -18,9 +18,9 @@ namespace Tutorial03.Cameras
         public Camera(GraphicsDevice device)
         {
 
-            Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver2, device.Viewport.AspectRatio, 0.0001f, 100000f);
+            Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver2, device.Viewport.AspectRatio, 0.01f, 100000f);
             this.device = device;
-            UpdateViewMatrix(new Vector3(50, 30, 50), new Vector3(80, 10, 80), Vector3.Up);
+            UpdateViewMatrix(new Vector3(0, 0, 0), new Vector3(0, 0, 0), Vector3.Up);
         }
 
         public void UpdateViewMatrix(Vector3 position, Vector3 target, Vector3 up)

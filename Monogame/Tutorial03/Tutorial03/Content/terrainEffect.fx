@@ -34,9 +34,8 @@ struct VertexShaderOutput
 {
 	float4 Position : SV_POSITION;
 	float2 TexCoord : TEXCOORD0;
-	float2 Normal : NORMAL0;
-	float LightIntensity : TEXCOORD1;
-	float4 TexWeights : TEXCOORD2;
+	float LightIntensity : NORMAL0;
+	float4 TexWeights : TEXCOORD1;
 };
  
 

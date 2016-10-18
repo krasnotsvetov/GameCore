@@ -10,6 +10,7 @@ namespace Tutorial03
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Triangle triangle;
         Terrain terrain;
         Camera camera;
         public Game1()
@@ -34,13 +35,15 @@ namespace Tutorial03
             model = Content.Load<Model>("cube");
             effect = new BasicEffect(GraphicsDevice);
             camera = new MoveableCamera(GraphicsDevice);
+
+            triangle = new Triangle(GraphicsDevice, new Vector3(0, 0, 0), new Vector3(0, 10, 0), new Vector3(10, 10, 0));
+
         }
 
         protected override void UnloadContent()
         {
         }
-
-        float rotation = -0.5f;
+         
 
         protected override void Update(GameTime gameTime)
         {
@@ -73,7 +76,7 @@ namespace Tutorial03
             }
 
             terrain.Draw(camera.View, camera.Projection);
-
+            triangle.Draw(camera.View, camera.Projection);
 
             base.Draw(gameTime);
         }

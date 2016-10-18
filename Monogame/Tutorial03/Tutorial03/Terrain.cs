@@ -92,6 +92,9 @@ namespace Tutorial03
                 Vector3 side2 = vertices[a].Position - vertices[b].Position;
                 Vector3 normal = Vector3.Cross(side1, side2);
 
+ 
+
+
                 vertices[a].Normal += normal;
                 vertices[b].Normal += normal;
                 vertices[c].Normal += normal;
@@ -119,7 +122,7 @@ namespace Tutorial03
         {
             effect.Parameters["BaseTextureA"].SetValue(baseTextureA);
             effect.Parameters["BaseTextureB"].SetValue(baseTextureB);
-            effect.Parameters["World"].SetValue(Matrix.Identity);
+            effect.Parameters["World"].SetValue(Matrix.CreateTranslation(10, -10, 10));
             effect.Parameters["View"].SetValue(view);
             effect.Parameters["Projection"].SetValue(projection);
             effect.Parameters["LightDirection"].SetValue(new Vector3(-0.5f, -1, -0.5f));

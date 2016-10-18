@@ -34,7 +34,7 @@ namespace Tutorial03.Cameras
             
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000.0f;
-            MouseState mouseState = Mouse.GetState();
+            `MouseState mouseState = Mouse.GetState();
             float deltaX = mouseState.X - lastMouseState.X;
             float deltaY = mouseState.Y - lastMouseState.Y;
             Yaw -= RotationSpeed * deltaX * elapsedTime;
