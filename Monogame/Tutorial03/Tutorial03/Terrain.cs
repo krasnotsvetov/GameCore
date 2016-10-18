@@ -19,7 +19,7 @@ namespace Tutorial03
         private Matrix world;
         private GraphicsDevice device;
 
-        VertexPositionNormalTexture[] vertices;
+        MultiTexturedVertexDeclaration[] vertices;
         int[] indices;
         int width;
         int height;
@@ -39,7 +39,7 @@ namespace Tutorial03
             texture.GetData<Color>(color);
 
             indices = new int[(width - 1) * (height - 1) * 6];
-            vertices = new VertexPositionNormalTexture[width * height];
+            vertices = new MultiTexturedVertexDeclaration[width * height];
 
                 
 
@@ -68,6 +68,7 @@ namespace Tutorial03
                 }
             }
 
+            float maxY = 0;
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
@@ -76,6 +77,7 @@ namespace Tutorial03
                     vertices[i * width + j].TextureCoordinate.X = (float)j / 30.0f;
                     vertices[i * width + j].TextureCoordinate.Y = (float)i / 30.0f;
 
+                    maxY = Math.Max(maxY, vertices[i * width + j].Position.Y);
                 }
             }
 
@@ -93,6 +95,16 @@ namespace Tutorial03
                 vertices[a].Normal += normal;
                 vertices[b].Normal += normal;
                 vertices[c].Normal += normal;
+
+                vertices[a].TextureWeights.X = vertices[a].Position.Y / maxY;
+                vertices[a].TextureWeights.Y = 1 - vertices[a].TextureWeights.X;
+
+                vertices[b].TextureWeights.X = vertices[a].Position.Y / maxY;
+                vertices[b].TextureWeights.Y = 1 - vertices[a].TextureWeights.X;
+
+                vertices[c].TextureWeights.X = vertices[a].Position.Y / maxY;
+                vertices[c].TextureWeights.Y = 1 - vertices[a].TextureWeights.X;
+
             }
 
             for (int i = 0; i < vertices.Length; i++)
@@ -105,7 +117,8 @@ namespace Tutorial03
 
         public void Draw(Matrix view, Matrix projection)
         {
-            effect.Parameters["BaseTexture"].SetValue(baseTextureA);
+            effect.Parameters["BaseTextureA"].SetValue(baseTextureA);
+            effect.Parameters["BaseTextureB"].SetValue(baseTextureB);
             effect.Parameters["World"].SetValue(Matrix.Identity);
             effect.Parameters["View"].SetValue(view);
             effect.Parameters["Projection"].SetValue(projection);
@@ -115,7 +128,7 @@ namespace Tutorial03
             {
                 pass.Apply();
 
-                device.DrawUserIndexedPrimitives<VertexPositionNormalTexture>(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
+                device.DrawUserIndexedPrimitives<MultiTexturedVertexDeclaration>(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
             }
         }
     }

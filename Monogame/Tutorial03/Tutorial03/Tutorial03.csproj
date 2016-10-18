@@ -41,6 +41,7 @@
     <Compile Include="Cameras\Camera.cs" />
     <Compile Include="Cameras\MoveableCamera.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="MultiTexturedVertexDeclaration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Terrain.cs" />

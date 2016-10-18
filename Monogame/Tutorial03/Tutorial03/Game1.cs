@@ -30,7 +30,7 @@ namespace Tutorial03
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            terrain = new Terrain(GraphicsDevice, Content.Load<Effect>("terrainEffect"), Content.Load<Texture2D>("austra"), Content.Load<Texture2D>("Ground"), Content.Load<Texture2D>("Ground") , 1f, 5f);
+            terrain = new Terrain(GraphicsDevice, Content.Load<Effect>("terrainEffect"), Content.Load<Texture2D>("austra"), Content.Load<Texture2D>("Ground"), Content.Load<Texture2D>("Ground2") , 1f, 5f);
             model = Content.Load<Model>("cube");
             effect = new BasicEffect(GraphicsDevice);
             camera = new MoveableCamera(GraphicsDevice);
@@ -44,7 +44,12 @@ namespace Tutorial03
 
         protected override void Update(GameTime gameTime)
         {
-            camera.Update(gameTime);
+            if (IsActive)
+            {
+                camera.Update(gameTime);
+            }
+           // rotation += 0.001f;
+            //camera.UpdateViewMatrix(Vector3.Transform(new Vector3(50, 50, 50), Matrix.CreateRotationY(rotation)), new Vector3(60, 30, 60), Vector3.Up);
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
